@@ -1,9 +1,6 @@
 <?php
+namespace support;
 
-function views(string $path)
-{
-    return Route::getInstance()->redirect_to_views($path);
-}
 
 class Route
 {
