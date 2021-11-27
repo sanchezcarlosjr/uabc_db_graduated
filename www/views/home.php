@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <style>
         .hero.is-info.is-bold {
-            background-image: linear-gradient(141deg, #BC4D20 0,#3e8ed0 71%,#4d83db 100%);
+            background-image: linear-gradient(141deg, #BC4D20 0, #3e8ed0 71%, #4d83db 100%);
         }
     </style>
 </head>
@@ -37,17 +37,7 @@
                     <ul>
                         <li>
                             <?php
-                            $link = mysqli_connect("database", "root", $_ENV['MYSQL_ROOT_PASSWORD'], null);
-
-                            /* check connection */
-                            if (mysqli_connect_errno()) {
-                                printf("MySQL connecttion failed: %s", mysqli_connect_error());
-                            } else {
-                                /* print server version */
-                                printf("MySQL Server %s", mysqli_get_server_info($link));
-                            }
-                            /* close connection */
-                            mysqli_close($link);
+                            Database::getInstance()->save("users", ["1"]);
                             ?>
                         </li>
                     </ul>
