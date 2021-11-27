@@ -169,6 +169,14 @@ http://localhost:8080/
 username: root  
 password: tiger
 
+## MySQL
+
+### Fresh database
+
+```shell
+    docker-compose exec database mysql -p"tiger" < www/database/database_schema.sql
+```
+
 ## Redis
 
 It comes with Redis. It runs on default port `6379`.
