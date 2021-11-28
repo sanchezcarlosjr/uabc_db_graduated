@@ -7,54 +7,44 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <style>
         .hero.is-info.is-bold {
-            background-image: linear-gradient(141deg, #BC4D20 0, #3e8ed0 71%, #4d83db 100%);
+            background-image: linear-gradient(141deg, #00723F 0, #3e8ed0 71%, #4d83db 100%);
         }
     </style>
 </head>
 <body>
-<section class="hero is-medium is-info is-bold">
+<section class="hero  is-small is-info is-bold">
     <div class="hero-body">
-        <div class="container has-text-centered">
+        <div class="conta iner has-text-centered">
             <h1 class="title">
                 UABC Posgrados
             </h1>
-            <h2 class="subtitle">
-                Your local development environment
-            </h2>
         </div>
     </div>
 </section>
+<?php echo $_SESSION['x'] ?>
 <section class="section">
-    <div class="box">
-        I'm in a box.
-    </div>
-    <div class="container">
-        <div class="columns">
-            <div class="column">
-                <h3 class="title is-3 has-text-centered">Environment</h3>
-                <hr>
-                <div class="content">
-                    <ul>
-                        <li>
-                            <?php
-                            Database::getInstance()->save("users", ["1"]);
-                            ?>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="column">
-                <h3 class="title is-3 has-text-centered">Quick Links</h3>
-                <hr>
-                <div class="content">
-                    <ul>
-                        <li><a href="phpinfo.php">phpinfo()</a></li>
-                        <li><a href="http://localhost:<? print $_ENV['PMA_PORT']; ?>">phpMyAdmin</a></li>
-                        <li><a href="test_db.php">Test DB Connection with mysqli</a></li>
-                        <li><a href="test_db_pdo.php">Test DB Connection with PDO</a></li>
-                    </ul>
-                </div>
-            </div>
+    <div class='container has-text-centered'>
+        <div class='columns is-mobile is-centered'>
+            <table class='table'>
+                <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Address</th>
+                    <th>Phone No.</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>vilod565</td>
+                    <td>vilod565@gmail.com</td>
+                    <td>Male</td>
+                    <td>Kolkata, West Bengal</td>
+                    <td>9856435632</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </section>

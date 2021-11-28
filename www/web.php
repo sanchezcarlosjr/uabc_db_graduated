@@ -4,7 +4,7 @@ use support\Route;
 use function support\view;
 
 Route::get("/", function () {
-    view("home");
+    view("home", ['x' => 'ABC']);
 });
 
 Route::get("/phpinfo", function () {

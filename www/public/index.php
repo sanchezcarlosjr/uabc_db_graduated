@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 $dir = dirname(__DIR__) . DIRECTORY_SEPARATOR;
 require_once $dir . 'support' . DIRECTORY_SEPARATOR . 'View.php';

@@ -1,7 +1,23 @@
 <?php
+
 namespace support;
 
-function view(string $path)
+function view(string $path, array $params = null)
 {
-    return Route::getInstance()->redirect_to_views($path);
+    createNewSession($params);
+    Route::getInstance()->redirect_to_views($path);
+}
+
+/**
+ * @param array|null $params
+ */
+function createNewSession(array $params = null): void
+{
+    session_unset();
+    if (!isset($params) || empty($params)) {
+        return;
+    }
+    foreach ($params as $key => $value) {
+        $_SESSION[$key] = $value;
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace support;
 
 
@@ -33,11 +34,11 @@ class Route
     {
         $views = $this->dirname . "/views/";
         $view_url = $views . $url . ".php";
-        return $this->redirect($view_url);
+        $this->redirect($view_url);
     }
 
     public function redirect(string $url)
     {
-        return require_once $url;
+        require_once $url;
     }
 }
