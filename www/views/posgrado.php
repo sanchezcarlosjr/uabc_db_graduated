@@ -10,6 +10,7 @@
         .hero.is-info.is-bold {
             background-image: linear-gradient(141deg, #00723F 0, #3e8ed0 71%, #4d83db 100%);
         }
+
         .toolbox {
             margin: 0 0 1em 0;
         }
@@ -29,19 +30,24 @@
     <div class="container toolbox">
         <a href="/" class="button is-light">Regresar</a>
     </div>
-   <form method="post">
-       <?php foreach ($_SESSION['fields'] as $field): ?>
-           <div class="field">
-               <label class="label"><?= $field; ?></label>
-               <div class="control">
-                   <input name="<?= $field; ?>" class="input" type="text">
-               </div>
-           </div>
-       <?php endforeach; ?>
-       <div class="control">
-           <button class="button is-primary" name="CREATE">Crear</button>
-       </div>
-   </form>
+    <form method="post">
+        <?php $canBeUpdate = isset($_SESSION['values']); ?>
+        <?php foreach ($_SESSION['fields'] as $field): ?>
+            <div class="field">
+                <label class="label"><?= $field; ?></label>
+                <div class="control">
+                    <input
+                            name="<?= $field; ?>"
+                            class="input"
+                            value="<?= $canBeUpdate ? $_SESSION['values'][$field] : "1"; ?>"
+                            type="text">
+                </div>
+            </div>
+        <?php endforeach; ?>
+        <div class="control">
+            <button class="button is-primary" name="CREATE">Crear</button>
+        </div>
+    </form>
 </section>
 </body>
 </html>

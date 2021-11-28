@@ -27,8 +27,14 @@ Route::create("/crear", function () {
 });
 
 Route::get("/editar", function () {
+    $graduate = Graduate::find($_GET['id']);
+    if (empty($graduate)) {
+        header('LOCATION: /');
+        die;
+    }
     view('posgrado', [
-        'fields' => Graduate::allColumns()
+        'fields' => Graduate::allColumns(),
+        'values' => $graduate[0]
     ]);
 });
 

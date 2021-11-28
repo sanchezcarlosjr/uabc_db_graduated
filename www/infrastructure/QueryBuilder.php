@@ -44,6 +44,12 @@ class QueryBuilder
         return $this->raw("DELETE FROM $this->table WHERE $key=$id");
     }
 
+    public function where(string $key, string $op, string $value)
+    {
+        array_push($this->params, $value);
+        return $this->add("WHERE $key $op ?");
+    }
+
     public function findColumns()
     {
         $database = $_ENV['MYSQL_DATABASE'];
@@ -56,6 +62,11 @@ class QueryBuilder
     {
         $params = empty($params) ? $this->params : $params;
         return Database::getInstance()->fetch($this, $params);
+    }
+
+    private function add(string $query): QueryBuilder {
+        $this->raw($this->query." ".$query);
+        return $this;
     }
 
     function getWithColumns(array $params = array()): array

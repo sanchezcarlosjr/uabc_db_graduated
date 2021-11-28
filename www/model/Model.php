@@ -52,7 +52,12 @@ abstract class Model
         return self::factory()->columnsUnsetPrimaryKey();
     }
 
-    public static function create(array $values)
+    public static function find(string $id)
+    {
+        return self::factory()->whereId($id)->get()['rows'];
+    }
+
+    public static function create(array $values): array
     {
         return self::factory()->insert($values)->get();
     }
@@ -70,6 +75,11 @@ abstract class Model
     public function insert(array $values)
     {
         return DB::table($this->table)->insert($values);
+    }
+
+    public function whereId(string $id)
+    {
+        return $this->select()->where($this->primary_key, '=', $id);
     }
 
     public function columnsUnsetPrimaryKey(): array
