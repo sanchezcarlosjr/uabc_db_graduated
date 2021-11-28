@@ -127,7 +127,11 @@ You can connect to web server using `docker-compose exec` command to perform var
 to login to container via ssh.
 
 ```shell
-docker-compose exec webserver bash
+docker compose exec webserver bash
+```
+
+```shell
+docker compose exec database bash
 ```
 
 ## PHP
@@ -158,7 +162,7 @@ By default following extensions are installed. May differ for PHP Verions <7.x.x
 ## Temporal web on Internet
 
 ```shell
-docker compose up -d && ngrok http 80
+ngrok http 80
 ```
 
 ## phpMyAdmin
