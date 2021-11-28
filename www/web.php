@@ -2,11 +2,13 @@
 
 use model\Graduate;
 use support\Route;
-use function support\transformToTable;
 use function support\view;
 
 Route::get("/", function () {
-    view("home", transformToTable(Graduate::all()));
+    view("home", [
+        'fields' => Graduate::columns(),
+        'data' => Graduate::all()
+    ]);
 });
 
 Route::get("/phpinfo", function () {
@@ -18,5 +20,5 @@ Route::get("/test_db_pdo", function () {
 });
 
 Route::get("/test", function () {
-    view("test", transformToTable(Graduate::all()));
+    view("test");
 });

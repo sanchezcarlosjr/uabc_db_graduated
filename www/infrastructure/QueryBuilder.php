@@ -23,6 +23,13 @@ class QueryBuilder
         return $this->raw("SELECT $query FROM $table");
     }
 
+    public function findColumns()
+    {
+        $query = "select column_name from information_schema.columns " .
+            "where table_schema = :database and table_name = :table_name";
+        return $this->raw($query);
+    }
+
     public function __toString()
     {
         return $this->query;

@@ -33,16 +33,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($_SESSION['data'] as $row_key => $row): ?>
-                        <tr>
-                            <?php foreach ($row as $column_key => $cell): ?>
-                                <td><?= $cell; ?></td>
-                            <?php endforeach; ?>
-                        </tr>
-                    <?php endforeach; ?>
+                <?php foreach ($_SESSION['data'] as $row_key => $row): ?>
+                    <tr>
+                        <?php foreach ($row as $column_key => $cell): ?>
+                            <td><?= $cell; ?></td>
+                        <?php endforeach; ?>
+                    </tr>
+                <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
+        <?php if (count($_SESSION['data']) == 0): ?>
+            <h2>Sin resultados</h2>
+        <?php endif ?>
     </div>
 </section>
 </body>
