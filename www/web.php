@@ -1,14 +1,12 @@
 <?php
 
+use infrastructure\Database as DB;
 use model\Graduate;
 use support\Route;
 use function support\view;
 
 Route::get("/", function () {
-    view("home", [
-        'fields' => Graduate::columns(),
-        'data' => Graduate::all()
-    ]);
+    view("home", Graduate::allWithColumns());
 });
 
 Route::get("/phpinfo", function () {
@@ -20,5 +18,7 @@ Route::get("/test_db_pdo", function () {
 });
 
 Route::get("/test", function () {
-    view("test");
+    $sql = "SELECT Y.id_posgrado FROM programas_de_posgrado X " .
+        "INNER JOIN posgrados Y ON Y.id_posgrado = X.id_posgrado WHERE campus = :campus";
+    view("test", DB::raw($sql)->getWithColumns(array(':campus' => 150)));
 });

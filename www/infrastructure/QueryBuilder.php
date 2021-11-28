@@ -5,6 +5,7 @@ namespace infrastructure;
 class QueryBuilder
 {
     private string $query = "";
+    private string $table = "";
 
     public function __construct(string $query = "")
     {
@@ -28,6 +29,16 @@ class QueryBuilder
         $query = "select column_name from information_schema.columns " .
             "where table_schema = :database and table_name = :table_name";
         return $this->raw($query);
+    }
+
+    function get(array $params = array()): array
+    {
+        return Database::getInstance()->fetch($this, $params);
+    }
+
+    function getWithColumns(array $params = array()): array
+    {
+        return Database::getInstance()->fetchWithColumns($this, $params);
     }
 
     public function __toString()

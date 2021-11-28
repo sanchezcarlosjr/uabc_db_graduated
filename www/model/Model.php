@@ -2,58 +2,27 @@
 
 namespace model;
 
-use infrastructure\Database;
-use infrastructure\QueryBuilder;
+use infrastructure\Database as DB;
 
 abstract class Model
 {
     protected string $table;
     protected array $fillables;
-    private QueryBuilder $queryBuilder;
 
-    public function __construct()
+    public static function allWithColumns(array $fillables = array()): array
     {
-        $this->queryBuilder = new QueryBuilder();
+        return self::factory()->select($fillables)->getWithColumns();
     }
 
-    public static function all(): array
+    public function select(array $fillables = array())
     {
-        return self::factory()->selectAll();
-    }
-
-    public function selectAll(): array
-    {
-        $this->queryBuilder = $this->queryBuilder->select($this->table, $this->fillables);
-        return $this->execute();
-    }
-
-    private function execute(array $params = array()): array
-    {
-        return Database::getInstance()->fetch($this->queryBuilder, $params);
+        $fillables = empty($fillables) ? $this->fillables : $fillables;
+        return DB::table($this->table, $fillables);
     }
 
     protected static function factory(): Model
     {
         $class = get_called_class();
         return new $class;
-    }
-
-    public static function columns(): array
-    {
-        return self::factory()->getColumns();
-    }
-
-    public function getColumns(): array
-    {
-        if ($this->fillables[0] != "*") {
-            return $this->fillables;
-        }
-        $this->queryBuilder = $this->queryBuilder->findColumns();
-        $columns = $this->execute(array('database' => $_ENV['MYSQL_DATABASE'], 'table_name' => $this->table));
-        $fields = [];
-        foreach($columns as $column) {
-            array_push($fields, $column['COLUMN_NAME']);
-        }
-        return $fields;
     }
 }

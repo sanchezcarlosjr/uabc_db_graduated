@@ -4,15 +4,15 @@
             <table class='table'>
                 <thead>
                 <tr>
-                    <?php foreach ($_SESSION['fields'] as $row_key): ?>
+                    <?php foreach ($_SESSION['columns'] as $row_key): ?>
                         <th><?= $row_key; ?></th>
                     <?php endforeach; ?>
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($_SESSION['data'] as $row_key => $row): ?>
+                <?php foreach ($_SESSION['rows'] as $row_key => $row): ?>
                     <tr>
-                        <?php foreach ($_SESSION['fields'] as $field_key): ?>
+                        <?php foreach ($_SESSION['columns'] as $field_key): ?>
                             <td><?= $row[$field_key]; ?></td>
                         <?php endforeach; ?>
                     </tr>
@@ -21,7 +21,7 @@
             </table>
         </div>
     </div>
-    <?php if (count($_SESSION['data']) == 0): ?>
+    <?php if (count($_SESSION['rows']) == 0): ?>
         <h2>Sin resultados</h2>
     <?php endif ?>
 </div>

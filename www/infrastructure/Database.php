@@ -2,7 +2,9 @@
 
 namespace infrastructure;
 
+use JetBrains\PhpStorm\ArrayShape;
 use PDO;
+use PDOStatement;
 
 class Database
 {
@@ -15,16 +17,23 @@ class Database
         $this->pdo = new PDO($database, $username, $password);
     }
 
-    public static function raw(string $sql, array $params = array())
+    public static function raw(string $sql)
     {
-        return self::getInstance()->fetch(new QueryBuilder($sql), $params);
+        return new QueryBuilder($sql);
     }
 
-    public function fetch(QueryBuilder $queryBuilder, array $params = array()): array
+    #[ArrayShape(['rows' => "array"])] public function fetch(QueryBuilder $queryBuilder, array $params = array()): array
+    {
+        return [
+            'rows' => $this->execute($queryBuilder, $params)->fetchAll(PDO::FETCH_ASSOC)
+        ];
+    }
+
+    public function execute(QueryBuilder $queryBuilder, array $params = array()): bool|PDOStatement
     {
         $sth = $this->pdo->prepare($queryBuilder);
         $sth->execute($params);
-        return $sth->fetchAll(PDO::FETCH_ASSOC);
+        return $sth;
     }
 
     public static function getInstance(): Database
@@ -38,5 +47,28 @@ class Database
             );
         }
         return self::$database;
+    }
+
+    public static function table($table, $fields = array('*')): QueryBuilder
+    {
+        $query = new QueryBuilder();
+        return $query->select($table, $fields);
+    }
+
+    #[ArrayShape(['columns' => "array", 'rows' => "array"])] public function fetchWithColumns(QueryBuilder $queryBuilder, array $params = array()): array
+    {
+        $sth = $this->execute($queryBuilder, $params);
+        return [
+            'columns' => $this->fetchColumns($sth),
+            'rows' => $sth->fetchAll(PDO::FETCH_ASSOC)
+        ];
+    }
+
+    protected function fetchColumns(PDOStatement $sth): array
+    {
+        for ($i = 0; $i < $sth->columnCount(); $i++) {
+            $columns[] = $sth->getColumnMeta($i)['name'];
+        }
+        return $columns;
     }
 }

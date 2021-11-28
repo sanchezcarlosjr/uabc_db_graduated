@@ -9,16 +9,6 @@
         .hero.is-info.is-bold {
             background-image: linear-gradient(141deg, #00723F 0, #3e8ed0 71%, #4d83db 100%);
         }
-
-        table, td, th {
-            text-align: center;
-            width: 20%;
-            padding: 5px;
-        }
-
-        table {
-            width: 2500px;
-        }
     </style>
 </head>
 <body>
