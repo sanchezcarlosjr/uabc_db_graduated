@@ -1,4 +1,7 @@
 <?php
+namespace infrastructure;
+
+use mysqli;
 
 class Database
 {

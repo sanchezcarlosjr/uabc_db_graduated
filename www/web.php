@@ -1,10 +1,11 @@
 <?php
 
 use support\Route;
+use model\Graduate;
 use function support\view;
 
 Route::get("/", function () {
-    view("home", ['x' => 'ABC']);
+    view("home", Graduate::list());
 });
 
 Route::get("/phpinfo", function () {

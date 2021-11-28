@@ -21,28 +21,25 @@
         </div>
     </div>
 </section>
-<?php echo $_SESSION['x'] ?>
 <section class="section">
     <div class='container has-text-centered'>
         <div class='columns is-mobile is-centered'>
             <table class='table'>
                 <thead>
                 <tr>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Gender</th>
-                    <th>Address</th>
-                    <th>Phone No.</th>
+                    <?php foreach ($_SESSION['fields'] as $row_key): ?>
+                        <th><?= $row_key; ?></th>
+                    <?php endforeach; ?>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>vilod565</td>
-                    <td>vilod565@gmail.com</td>
-                    <td>Male</td>
-                    <td>Kolkata, West Bengal</td>
-                    <td>9856435632</td>
-                </tr>
+                    <?php foreach ($_SESSION['data'] as $row_key => $row): ?>
+                        <tr>
+                            <?php foreach ($row as $column_key => $cell): ?>
+                                <td><?= $cell; ?></td>
+                            <?php endforeach; ?>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
