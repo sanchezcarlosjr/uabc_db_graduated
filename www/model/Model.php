@@ -3,52 +3,38 @@
 namespace model;
 
 use infrastructure\Database;
+use infrastructure\QueryBuilder;
 
 abstract class Model
 {
     protected string $table;
+    protected array $fillable;
+    private QueryBuilder $queryBuilder;
 
-    public static function list(): array
+    public function __construct()
     {
-        return self::factory()->all();
+        $this->queryBuilder = new QueryBuilder();
     }
 
-    public function all()
+    public static function all(): array
     {
-        return [
-            'fields' => ['A', 'B', 'C', 'D', 'E'],
-            'data' => [
-                [
-                    'A' => '1',
-                    'B' => '2',
-                    'C' => '3',
-                    'D' => '4',
-                    'E' => '5'
-                ],
-                [
-                    'A' => '10',
-                    'B' => '20',
-                    'C' => '30',
-                    'D' => '40',
-                    'E' => '50'
-                ]
-            ]
-        ];
+        return self::factory()->selectAll();
+    }
+
+    public function selectAll(): array
+    {
+        $this->queryBuilder = $this->queryBuilder->select($this->table, $this->fillable);
+        return $this->execute();
+    }
+
+    private function execute(array $params = array())
+    {
+        return Database::getInstance()->fetch($this->queryBuilder, $params);
     }
 
     protected static function factory(): Model
     {
         $class = get_called_class();
         return new $class;
-    }
-
-    public static function create(): void
-    {
-        self::factory()->save([]);
-    }
-
-    public function save($values)
-    {
-        Database::getInstance()->save($this->table, $values);
     }
 }

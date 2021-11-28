@@ -2,41 +2,41 @@
 
 namespace infrastructure;
 
-use Error;
-use mysqli;
+use PDO;
 
 class Database
 {
     private static Database $database;
-    private mysqli $mysqli;
+    private ?PDO $pdo;
 
-    protected function __construct(string $hostname, string $username, string $password, string $database)
+    protected function __construct(string $hostname, string $username, string $password, string $dbname)
     {
-        $link = mysqli_connect($hostname, $username, $password, $database);
-        if (mysqli_connect_errno() || $link == null || $link == false) {
-            throw new Error("MySQL connecttion failed: %s" . mysqli_connect_error());
-        }
-        $this->mysqli = $link;
+        $database = "mysql:dbname=$dbname;host=$hostname:3306";
+        $this->pdo = new PDO($database, $username, $password);
+    }
+
+    public static function raw(string $sql, array $params = array())
+    {
+        return self::getInstance()->fetch(new QueryBuilder($sql), $params);
+    }
+
+    public function fetch(QueryBuilder $queryBuilder, array $params = array()): array
+    {
+        $sth = $this->pdo->prepare($queryBuilder);
+        $sth->execute($params);
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function getInstance(): Database
     {
         if (!isset(self::$database)) {
-            self::$database = new static("database", "docker", "docker", "docker");
+            self::$database = new static(
+                "database",
+                'root',
+                $_ENV['MYSQL_ROOT_PASSWORD'],
+                $_ENV['MYSQL_DATABASE']
+            );
         }
         return self::$database;
-    }
-
-    public function save($table, $values)
-    {
-        $operations = substr(str_repeat("(?),", count($values)), 0, -1);
-        $stmt = $this->mysqli->prepare("INSERT INTO " . $table . " VALUES " . $operations);
-        $stmt->bind_param('i', ...$values);
-        $stmt->execute();
-    }
-
-    function __destruct()
-    {
-        mysqli_close($this->mysqli);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace support;
 
+use JetBrains\PhpStorm\ArrayShape;
+
 function view(string $path, array $params = null)
 {
     createNewSession($params);
@@ -13,11 +15,19 @@ function view(string $path, array $params = null)
  */
 function createNewSession(array $params = null): void
 {
-    session_unset();
+    session_destroy();
     if (!isset($params) || empty($params)) {
         return;
     }
     foreach ($params as $key => $value) {
         $_SESSION[$key] = $value;
     }
+}
+
+#[ArrayShape(['fields' => "int[]|string[]", 'data' => "array"])] function transformToTable(array $params)
+{
+    return [
+        'fields' => array_keys($params[0]),
+        'data' => $params
+    ];
 }
