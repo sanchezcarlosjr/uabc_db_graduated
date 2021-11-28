@@ -9,6 +9,10 @@ Route::get("/", function () {
     view("home", Graduate::allWithColumns());
 });
 
+Route::delete("/", function (string $id) {
+    Graduate::destroy($id);
+});
+
 Route::get("/crear", function () {
     view('posgrado');
 });

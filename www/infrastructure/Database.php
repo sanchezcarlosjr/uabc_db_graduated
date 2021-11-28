@@ -49,10 +49,9 @@ class Database
         return self::$database;
     }
 
-    public static function table($table, $fields = array('*')): QueryBuilder
+    public static function table($table): QueryBuilder
     {
-        $query = new QueryBuilder();
-        return $query->select($table, $fields);
+        return new QueryBuilder(table: $table);
     }
 
     #[ArrayShape(['columns' => "array", 'rows' => "array"])] public function fetchWithColumns(QueryBuilder $queryBuilder, array $params = array()): array

@@ -15,7 +15,7 @@
                     <tr>
                         <td>
                             <form method="post" action="<?= "/?id=".$row['id_posgrado']; ?>">
-                                <button class="button" name="destroy" type="submit">
+                                <button class="button" name="DELETE" type="submit">
                                         <span class="icon is-small">
                                             <i class="fas fa-trash"></i>
                                         </span>

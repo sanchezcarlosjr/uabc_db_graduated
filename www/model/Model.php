@@ -8,16 +8,29 @@ abstract class Model
 {
     protected string $table;
     protected array $fillables;
+    protected string $primary_key;
 
     public static function allWithColumns(array $fillables = array()): array
     {
-        return self::factory()->select($fillables)->getWithColumns();
+        $result = self::factory()->select($fillables)->getWithColumns();
+        array_push($result, ['primary_key' => self::factory()->primary_key]);
+        return $result;
+    }
+
+    public static function destroy(string $id): array
+    {
+        return self::factory()->delete($id)->get();
     }
 
     public function select(array $fillables = array())
     {
         $fillables = empty($fillables) ? $this->fillables : $fillables;
-        return DB::table($this->table, $fillables);
+        return DB::table($this->table)->select($fillables);
+    }
+
+    public function delete(string $id = "")
+    {
+        return DB::table($this->table)->destroy($this->primary_key, $id);
     }
 
     protected static function factory(): Model

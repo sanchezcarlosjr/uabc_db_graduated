@@ -7,9 +7,10 @@ class QueryBuilder
     private string $query = "";
     private string $table = "";
 
-    public function __construct(string $query = "")
+    public function __construct(string $query = "", string $table = "")
     {
         $this->raw($query);
+        $this->setTable($table);
     }
 
     public function raw(string $query): QueryBuilder
@@ -18,10 +19,20 @@ class QueryBuilder
         return $this;
     }
 
-    public function select($table, $values)
+    public function setTable(string $table)
+    {
+        $this->table = $table;
+    }
+
+    public function select(array $values = array('*')): QueryBuilder
     {
         $query = implode(",", $values);
-        return $this->raw("SELECT $query FROM $table");
+        return $this->raw("SELECT $query FROM $this->table");
+    }
+
+    public function destroy(string $key, string $id): QueryBuilder
+    {
+        return $this->raw("DELETE FROM $this->table WHERE $key=$id");
     }
 
     public function findColumns()

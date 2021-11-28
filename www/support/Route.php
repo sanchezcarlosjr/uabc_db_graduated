@@ -14,6 +14,20 @@ class Route
         $this->dirname = dirname(__DIR__);
     }
 
+    public static function get(string $path, $callback)
+    {
+        if (self::getInstance()->checkIfIs('GET', $path)) {
+            $callback();
+            die;
+        }
+    }
+
+    public function checkIfIs(string $method, string $path): bool
+    {
+        $actual_path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+        return $_SERVER['REQUEST_METHOD'] === $method && $actual_path == $path;
+    }
+
     public static function getInstance(): Route
     {
         if (!isset(self::$route)) {
@@ -22,11 +36,19 @@ class Route
         return self::$route;
     }
 
-    public static function get(string $path, $callback)
+    public static function delete(string $path, $callback)
     {
-        $actual_path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
-        if ($actual_path == $path || $path == "*") {
-            $callback();
+        if (array_key_exists('DELETE', $_POST)) {
+            self::post($path, $callback);
+        }
+    }
+
+    public static function post(string $path, $callback)
+    {
+        if (self::getInstance()->checkIfIs('POST', $path)) {
+            $callback(...$_GET);
+            header('LOCATION: ' . $path);
+            die;
         }
     }
 
