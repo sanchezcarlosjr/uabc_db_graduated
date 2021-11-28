@@ -17,15 +17,44 @@ abstract class Model
         return $result;
     }
 
-    public static function destroy(string $id): array
-    {
-        return self::factory()->delete($id)->get();
-    }
-
     public function select(array $fillables = array())
     {
         $fillables = empty($fillables) ? $this->fillables : $fillables;
         return DB::table($this->table)->select($fillables);
+    }
+
+    protected static function factory(): Model
+    {
+        $class = get_called_class();
+        return new $class;
+    }
+
+    public static function allColumns(): array
+    {
+        return self::factory()->columns();
+    }
+
+    public function columns()
+    {
+        if ($this->fillables[0] != '*') {
+            return $this->fillables;
+        }
+        $columns = DB::table($this->table)->findColumns()->get();
+        $fillables = array();
+        foreach($columns['rows'] as $column) {
+            array_push($fillables, $column['COLUMN_NAME']);
+        }
+        return $fillables;
+    }
+
+    public static function columnsNoPrimaryKey(): array
+    {
+        return self::factory()->columnsUnsetPrimaryKey();
+    }
+
+    public static function destroy(string $id): array
+    {
+        return self::factory()->delete($id)->get();
     }
 
     public function delete(string $id = "")
@@ -33,9 +62,8 @@ abstract class Model
         return DB::table($this->table)->destroy($this->primary_key, $id);
     }
 
-    protected static function factory(): Model
+    public function columnsUnsetPrimaryKey(): array
     {
-        $class = get_called_class();
-        return new $class;
+        return array_diff($this->columns(), [$this->primary_key]);
     }
 }

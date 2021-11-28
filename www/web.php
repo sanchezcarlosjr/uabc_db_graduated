@@ -14,11 +14,15 @@ Route::delete("/", function (string $id) {
 });
 
 Route::get("/crear", function () {
-    view('posgrado');
+    view('posgrado', [
+        'fields' => Graduate::columnsNoPrimaryKey()
+    ]);
 });
 
 Route::get("/editar", function () {
-    view('posgrado');
+    view('posgrado', [
+        'fields' => Graduate::allColumns()
+    ]);
 });
 
 Route::get("/phpinfo", function () {

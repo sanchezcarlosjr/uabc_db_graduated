@@ -37,8 +37,9 @@ class QueryBuilder
 
     public function findColumns()
     {
+        $database = $_ENV['MYSQL_DATABASE'];
         $query = "select column_name from information_schema.columns " .
-            "where table_schema = :database and table_name = :table_name";
+            "where table_schema = \"$database\" and table_name = \"$this->table\"";
         return $this->raw($query);
     }
 

@@ -30,14 +30,16 @@
         <a href="/" class="button is-light">Regresar</a>
     </div>
    <form method="post">
-       <div class="field">
-           <label class="label">Name</label>
-           <div class="control">
-               <input class="input" type="text" placeholder="e.g Alex Smith">
+       <?php foreach ($_SESSION['fields'] as $field): ?>
+           <div class="field">
+               <label class="label"><?= $field; ?></label>
+               <div class="control">
+                   <input name="<?= $field; ?>" class="input" type="text">
+               </div>
            </div>
-       </div>
+       <?php endforeach; ?>
        <div class="control">
-           <button class="button is-primary">Submit</button>
+           <button class="button is-primary" name="CREATE">Crear</button>
        </div>
    </form>
 </section>
