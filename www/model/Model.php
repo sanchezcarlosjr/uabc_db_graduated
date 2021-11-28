@@ -52,6 +52,11 @@ abstract class Model
         return self::factory()->columnsUnsetPrimaryKey();
     }
 
+    public static function create(array $values)
+    {
+        return self::factory()->insert($values)->get();
+    }
+
     public static function destroy(string $id): array
     {
         return self::factory()->delete($id)->get();
@@ -60,6 +65,11 @@ abstract class Model
     public function delete(string $id = "")
     {
         return DB::table($this->table)->destroy($this->primary_key, $id);
+    }
+
+    public function insert(array $values)
+    {
+        return DB::table($this->table)->insert($values);
     }
 
     public function columnsUnsetPrimaryKey(): array

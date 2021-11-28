@@ -11,12 +11,19 @@ Route::get("/", function () {
 
 Route::delete("/", function (string $id) {
     Graduate::destroy($id);
+    header('LOCATION: /');
 });
 
 Route::get("/crear", function () {
     view('posgrado', [
         'fields' => Graduate::columnsNoPrimaryKey()
     ]);
+});
+
+Route::create("/crear", function () {
+    unset($_POST['CREATE']);
+    Graduate::create($_POST);
+    header('LOCATION: /');
 });
 
 Route::get("/editar", function () {

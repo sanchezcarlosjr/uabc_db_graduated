@@ -43,12 +43,17 @@ class Route
         }
     }
 
+    public static function create(string $path, $callback)
+    {
+        if (array_key_exists('CREATE', $_POST)) {
+            self::post($path, $callback);
+        }
+    }
+
     public static function post(string $path, $callback)
     {
         if (self::getInstance()->checkIfIs('POST', $path)) {
             $callback(...$_GET);
-            header('LOCATION: ' . $path);
-            die;
         }
     }
 

@@ -3,13 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: database:3306
--- Generation Time: Nov 27, 2021 at 05:49 PM
+-- Generation Time: Nov 28, 2021 at 11:11 PM
 -- Server version: 8.0.27
 -- PHP Version: 7.4.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "America/Tijuana";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -20,9 +20,6 @@ SET time_zone = "America/Tijuana";
 --
 -- Database: `uabc_db_gratuated_system`
 --
-DROP DATABASE IF EXISTS uabc_db_gratuated_system;
-CREATE DATABASE IF NOT EXISTS `uabc_db_gratuated_system` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
-USE `uabc_db_gratuated_system`;
 
 -- --------------------------------------------------------
 
@@ -30,7 +27,6 @@ USE `uabc_db_gratuated_system`;
 -- Table structure for table `alumnos`
 --
 
-DROP TABLE IF EXISTS `alumnos`;
 CREATE TABLE `alumnos` (
   `matricula` int NOT NULL,
   `nombre` varchar(30) NOT NULL,
@@ -52,11 +48,17 @@ CREATE TABLE `alumnos` (
 -- Table structure for table `areas_del_conocimiento`
 --
 
-DROP TABLE IF EXISTS `areas_del_conocimiento`;
 CREATE TABLE `areas_del_conocimiento` (
   `id_area_del_conocimiento` smallint NOT NULL,
   `area` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `areas_del_conocimiento`
+--
+
+INSERT INTO `areas_del_conocimiento` (`id_area_del_conocimiento`, `area`) VALUES
+(1, 'D');
 
 -- --------------------------------------------------------
 
@@ -64,7 +66,6 @@ CREATE TABLE `areas_del_conocimiento` (
 -- Table structure for table `becas`
 --
 
-DROP TABLE IF EXISTS `becas`;
 CREATE TABLE `becas` (
   `id_beca` tinyint NOT NULL,
   `nombre` varchar(30) NOT NULL,
@@ -77,7 +78,6 @@ CREATE TABLE `becas` (
 -- Table structure for table `becas_disponibles`
 --
 
-DROP TABLE IF EXISTS `becas_disponibles`;
 CREATE TABLE `becas_disponibles` (
   `id_beca` tinyint NOT NULL,
   `id_posgrado` int NOT NULL
@@ -89,7 +89,6 @@ CREATE TABLE `becas_disponibles` (
 -- Table structure for table `empleados`
 --
 
-DROP TABLE IF EXISTS `empleados`;
 CREATE TABLE `empleados` (
   `nempleado` int NOT NULL,
   `nombre` varchar(30) NOT NULL,
@@ -104,7 +103,6 @@ CREATE TABLE `empleados` (
 -- Table structure for table `estatus_de_alumno`
 --
 
-DROP TABLE IF EXISTS `estatus_de_alumno`;
 CREATE TABLE `estatus_de_alumno` (
   `id_estatus_de_alumno` tinyint NOT NULL,
   `estatus` varchar(30) NOT NULL
@@ -116,7 +114,6 @@ CREATE TABLE `estatus_de_alumno` (
 -- Table structure for table `lineas_de_investigacion`
 --
 
-DROP TABLE IF EXISTS `lineas_de_investigacion`;
 CREATE TABLE `lineas_de_investigacion` (
   `id_linea_de_investigacion` smallint NOT NULL,
   `linea_de_investigacion` varchar(30) NOT NULL,
@@ -129,7 +126,6 @@ CREATE TABLE `lineas_de_investigacion` (
 -- Table structure for table `materias`
 --
 
-DROP TABLE IF EXISTS `materias`;
 CREATE TABLE `materias` (
   `id_materia` smallint NOT NULL,
   `materia` varchar(50) NOT NULL,
@@ -146,7 +142,6 @@ CREATE TABLE `materias` (
 -- Table structure for table `materias_posgrado`
 --
 
-DROP TABLE IF EXISTS `materias_posgrado`;
 CREATE TABLE `materias_posgrado` (
   `id_materia` smallint NOT NULL,
   `id_posgrado` int NOT NULL
@@ -158,7 +153,6 @@ CREATE TABLE `materias_posgrado` (
 -- Table structure for table `posgrados`
 --
 
-DROP TABLE IF EXISTS `posgrados`;
 CREATE TABLE `posgrados` (
   `id_posgrado` int NOT NULL,
   `posgrado` varchar(30) NOT NULL,
@@ -179,7 +173,6 @@ CREATE TABLE `posgrados` (
 -- Table structure for table `programas_de_posgrado`
 --
 
-DROP TABLE IF EXISTS `programas_de_posgrado`;
 CREATE TABLE `programas_de_posgrado` (
   `id_programa` tinyint NOT NULL,
   `id_unidad_academica` smallint NOT NULL,
@@ -194,7 +187,6 @@ CREATE TABLE `programas_de_posgrado` (
 -- Table structure for table `unidades_academicas`
 --
 
-DROP TABLE IF EXISTS `unidades_academicas`;
 CREATE TABLE `unidades_academicas` (
   `id_unidad_academica` smallint NOT NULL,
   `unidad_academica` varchar(50) NOT NULL
@@ -254,13 +246,13 @@ ALTER TABLE `lineas_de_investigacion`
 -- Indexes for table `materias`
 --
 ALTER TABLE `materias`
-  ADD PRIMARY KEY (`id_materia`,`creditos`);
+  ADD PRIMARY KEY (`id_materia`);
 
 --
 -- Indexes for table `materias_posgrado`
 --
 ALTER TABLE `materias_posgrado`
-  ADD PRIMARY KEY (`id_materia`,`id_posgrado`),
+  ADD PRIMARY KEY (`id_materia`),
   ADD KEY `id_posgrado` (`id_posgrado`);
 
 --
@@ -284,6 +276,82 @@ ALTER TABLE `programas_de_posgrado`
 --
 ALTER TABLE `unidades_academicas`
   ADD PRIMARY KEY (`id_unidad_academica`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `alumnos`
+--
+ALTER TABLE `alumnos`
+  MODIFY `matricula` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `areas_del_conocimiento`
+--
+ALTER TABLE `areas_del_conocimiento`
+  MODIFY `id_area_del_conocimiento` smallint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `becas`
+--
+ALTER TABLE `becas`
+  MODIFY `id_beca` tinyint NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `becas_disponibles`
+--
+ALTER TABLE `becas_disponibles`
+  MODIFY `id_beca` tinyint NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `empleados`
+--
+ALTER TABLE `empleados`
+  MODIFY `nempleado` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `estatus_de_alumno`
+--
+ALTER TABLE `estatus_de_alumno`
+  MODIFY `id_estatus_de_alumno` tinyint NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `lineas_de_investigacion`
+--
+ALTER TABLE `lineas_de_investigacion`
+  MODIFY `id_linea_de_investigacion` smallint NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `materias`
+--
+ALTER TABLE `materias`
+  MODIFY `id_materia` smallint NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `materias_posgrado`
+--
+ALTER TABLE `materias_posgrado`
+  MODIFY `id_materia` smallint NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `posgrados`
+--
+ALTER TABLE `posgrados`
+  MODIFY `id_posgrado` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `programas_de_posgrado`
+--
+ALTER TABLE `programas_de_posgrado`
+  MODIFY `id_programa` tinyint NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `unidades_academicas`
+--
+ALTER TABLE `unidades_academicas`
+  MODIFY `id_unidad_academica` smallint NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
