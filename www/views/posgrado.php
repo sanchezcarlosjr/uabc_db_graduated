@@ -11,12 +11,7 @@
             background-image: linear-gradient(141deg, #00723F 0, #3e8ed0 71%, #4d83db 100%);
         }
         .toolbox {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: flex-end;
-            align-self: center;
-            height: 3em;
+            margin: 0 0 1em 0;
         }
     </style>
 </head>
@@ -32,9 +27,19 @@
 </section>
 <section class="section">
     <div class="container toolbox">
-        <a href="/crear" class="button is-light">Nuevo</a>
+        <a href="/" class="button is-light">Regresar</a>
     </div>
-    <?php include_once 'table.php'; ?>
+   <form method="post">
+       <div class="field">
+           <label class="label">Name</label>
+           <div class="control">
+               <input class="input" type="text" placeholder="e.g Alex Smith">
+           </div>
+       </div>
+       <div class="control">
+           <button class="button is-primary">Submit</button>
+       </div>
+   </form>
 </section>
 </body>
 </html>

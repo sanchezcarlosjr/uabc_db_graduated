@@ -9,6 +9,14 @@ Route::get("/", function () {
     view("home", Graduate::allWithColumns());
 });
 
+Route::get("/crear", function () {
+    view('posgrado');
+});
+
+Route::get("/editar", function () {
+    view('posgrado');
+});
+
 Route::get("/phpinfo", function () {
     view("phpinfo");
 });
