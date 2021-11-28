@@ -1,6 +1,8 @@
 <?php
+
 namespace infrastructure;
 
+use Error;
 use mysqli;
 
 class Database
