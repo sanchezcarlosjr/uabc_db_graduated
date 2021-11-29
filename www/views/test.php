@@ -12,15 +12,7 @@
     </style>
 </head>
 <body>
-<section class="hero  is-small is-info is-bold">
-    <div class="hero-body">
-        <div class="container has-text-centered">
-            <h1 class="title">
-                UABC Prueba de Consulta
-            </h1>
-        </div>
-    </div>
-</section>
+<?php include_once 'navbar.php'; ?>
 <section class="section">
     <?php include_once 'table.php'; ?>
 </section>
