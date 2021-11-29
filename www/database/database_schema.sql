@@ -185,17 +185,17 @@ CREATE TABLE `materias_posgrado`
 
 CREATE TABLE `posgrados`
 (
-    `id_posgrado`              int         NOT NULL,
-    `posgrado`                 varchar(100) NOT NULL,
-    `reconocimiento_conacyt`   tinyint     NOT NULL,
-    `perfil_de_ingreso`        text        NOT NULL,
-    `perfil_de_egreso`         text        NOT NULL,
-    `estatus`                  tinyint     NOT NULL,
-    `tipo_de_plan`             tinyint     NOT NULL,
-    `modalidad`                tinyint     NOT NULL,
-    `tipo_de_programa`         varchar(20) NOT NULL,
-    `id_area_del_conocimiento` smallint    NOT NULL,
-    `fecha_de_ingreso`         text        NOT NULL
+    `id_posgrado`              int                                            NOT NULL,
+    `posgrado`                 varchar(100)                                   NOT NULL,
+    `reconocimiento_conacyt`   enum ('Si', 'No')                              NOT NULL,
+    `perfil_de_ingreso`        text                                           NOT NULL,
+    `perfil_de_egreso`         text                                           NOT NULL,
+    `estatus`                  enum ('Vigente', 'No vigente')                 NOT NULL,
+    `tipo_de_plan`             tinyint                                        NOT NULL,
+    `modalidad`                enum ('Escolarizado', 'Semiescolarizado')      NOT NULL,
+    `tipo_de_programa`         enum ('Especialidad', 'Maestría', 'Doctorado') NOT NULL,
+    `id_area_del_conocimiento` smallint                                       NOT NULL,
+    `fecha_de_ingreso`         text                                           NOT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci;
@@ -208,10 +208,10 @@ CREATE TABLE `posgrados`
 
 CREATE TABLE `programas_de_posgrado`
 (
-    `id_unidad_academica` smallint NOT NULL,
-    `id_posgrado`         int      NOT NULL,
-    `campus`              tinyint  NOT NULL,
-    `coordinador`         int      NOT NULL
+    `id_unidad_academica` smallint                                 NOT NULL,
+    `id_posgrado`         int                                      NOT NULL,
+    `campus`              enum ('Ensenada', 'Tijuana', 'Mexicali') NOT NULL,
+    `coordinador`         int                                      NOT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci;
