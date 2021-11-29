@@ -38,6 +38,13 @@ Route::get("/editar", function () {
     ]);
 });
 
+Route::update("/editar", function (string $id) {
+    unset($_POST['UPDATE']);
+    Graduate::update($id, $_POST);
+    header('LOCATION: /');
+    die;
+});
+
 Route::get("/phpinfo", function () {
     view("phpinfo");
 });

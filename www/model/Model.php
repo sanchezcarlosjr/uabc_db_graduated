@@ -62,6 +62,11 @@ abstract class Model
         return self::factory()->insert($values)->get();
     }
 
+    public static function update(string $id, array $values): array
+    {
+        return self::factory()->updateModel($id, $values)->get();
+    }
+
     public static function destroy(string $id): array
     {
         return self::factory()->delete($id)->get();
@@ -75,6 +80,11 @@ abstract class Model
     public function insert(array $values)
     {
         return DB::table($this->table)->insert($values);
+    }
+
+    public function updateModel(string $id, array $values)
+    {
+        return DB::table($this->table)->update($values)->where($this->primary_key, '=', $id);
     }
 
     public function whereId(string $id)

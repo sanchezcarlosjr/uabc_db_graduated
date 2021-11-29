@@ -44,6 +44,13 @@ class QueryBuilder
         return $this->raw("DELETE FROM $this->table WHERE $key=$id");
     }
 
+    public function update(array $params): QueryBuilder
+    {
+        $this->params = array_values($params);
+        $values = implode(' = ?,', array_keys($params)).' = ?';
+        return $this->raw("UPDATE $this->table SET $values");
+    }
+
     public function where(string $key, string $op, string $value)
     {
         array_push($this->params, $value);

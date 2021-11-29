@@ -45,7 +45,11 @@
             </div>
         <?php endforeach; ?>
         <div class="control">
-            <button class="button is-primary" name="CREATE">Crear</button>
+            <button
+                    class="button is-primary"
+                    name="<?= $canBeUpdate ? "UPDATE" : "CREATE"; ?>">
+                <?= $canBeUpdate ? "Actualizar" : "Crear"; ?>
+            </button>
         </div>
     </form>
 </section>

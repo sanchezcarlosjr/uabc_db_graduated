@@ -43,6 +43,13 @@ class Route
         }
     }
 
+    public static function post(string $path, $callback)
+    {
+        if (self::getInstance()->checkIfIs('POST', $path)) {
+            $callback(...$_GET);
+        }
+    }
+
     public static function create(string $path, $callback)
     {
         if (array_key_exists('CREATE', $_POST)) {
@@ -50,10 +57,10 @@ class Route
         }
     }
 
-    public static function post(string $path, $callback)
+    public static function update(string $path, $callback)
     {
-        if (self::getInstance()->checkIfIs('POST', $path)) {
-            $callback(...$_GET);
+        if (array_key_exists('UPDATE', $_POST)) {
+            self::post($path, $callback);
         }
     }
 
