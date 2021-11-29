@@ -17,15 +17,7 @@
     </style>
 </head>
 <body>
-<section class="hero  is-small is-info is-bold">
-    <div class="hero-body">
-        <div class="container has-text-centered">
-            <h1 class="title">
-                UABC Posgrados
-            </h1>
-        </div>
-    </div>
-</section>
+<?php include_once 'navbar.php'; ?>
 <section class="section">
     <div class="container toolbox">
         <a href="/" class="button is-light">Regresar</a>
