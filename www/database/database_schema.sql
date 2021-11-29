@@ -208,7 +208,6 @@ CREATE TABLE `posgrados`
 
 CREATE TABLE `programas_de_posgrado`
 (
-    `id_programa`         tinyint  NOT NULL,
     `id_unidad_academica` smallint NOT NULL,
     `id_posgrado`         int      NOT NULL,
     `campus`              tinyint  NOT NULL,
@@ -305,7 +304,7 @@ ALTER TABLE `posgrados`
 -- Indexes for table `programas_de_posgrado`
 --
 ALTER TABLE `programas_de_posgrado`
-    ADD PRIMARY KEY (`id_programa`),
+    ADD PRIMARY KEY (`id_unidad_academica`, `id_posgrado`),
     ADD KEY `id_unidad_academica` (`id_unidad_academica`),
     ADD KEY `id_posgrado` (`id_posgrado`),
     ADD KEY `coordinador` (`coordinador`);
@@ -380,12 +379,6 @@ ALTER TABLE `materias_posgrado`
 --
 ALTER TABLE `posgrados`
     MODIFY `id_posgrado` int NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `programas_de_posgrado`
---
-ALTER TABLE `programas_de_posgrado`
-    MODIFY `id_programa` tinyint NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `unidades_academicas`
