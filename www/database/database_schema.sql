@@ -186,7 +186,7 @@ CREATE TABLE `materias_posgrado`
 CREATE TABLE `posgrados`
 (
     `id_posgrado`              int         NOT NULL,
-    `posgrado`                 varchar(30) NOT NULL,
+    `posgrado`                 varchar(100) NOT NULL,
     `reconocimiento_conacyt`   tinyint     NOT NULL,
     `perfil_de_ingreso`        text        NOT NULL,
     `perfil_de_egreso`         text        NOT NULL,
