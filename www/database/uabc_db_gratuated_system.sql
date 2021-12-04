@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: database:3306
--- Generation Time: Dec 03, 2021 at 09:54 PM
+-- Generation Time: Dec 04, 2021 at 02:18 AM
 -- Server version: 8.0.27
 -- PHP Version: 7.4.20
 
@@ -20,9 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `uabc_db_gratuated_system`
 --
-DROP DATABASE IF EXISTS uabc_db_gratuated_system;
-CREATE DATABASE uabc_db_gratuated_system;
-USE uabc_db_gratuated_system;
 
 -- --------------------------------------------------------
 
@@ -72,7 +69,7 @@ CREATE TABLE `areas_del_conocimiento` (
 
 INSERT INTO `areas_del_conocimiento` (`id_area_del_conocimiento`, `area`) VALUES
 (1, 'D'),
-(2, 'C'),
+(2, 'CIENCIAS NATURALES Y EXACTAS'),
 (3, 'M'),
 (4, 'O'),
 (5, 'B');
@@ -235,10 +232,10 @@ CREATE TABLE `posgrados` (
 --
 
 INSERT INTO `posgrados` (`id_posgrado`, `posgrado`, `reconocimiento_conacyt`, `perfil_de_ingreso`, `perfil_de_egreso`, `estatus`, `tipo_de_plan`, `modalidad`, `tipo_de_programa`, `id_area_del_conocimiento`, `fecha_de_ingreso`) VALUES
-(12040, 'MAESTRIA EN FISIOTERAPIA DEPORTIVA', 'No', 'Fisioterapia', 'Desarrolla metodologia de entrenamiento y tecnicas para trabajar en un equipo deportivo', 'No vigente', 'Trimestral', 'Escolarizado', '', 4, '13/05/23'),
-(12050, 'MAESTRIA EN ADMINISTRACIÃ“N DE NEGOCIOS CON ORIENTACIÃ“N EN HOSPITALIDAD', 'Si', 'Administracion de empresas', 'Desarrolla tu capacidad gerencial y directiva para coordinar y administrar proyectos en esta industria.', 'Vigente', 'Cuatrimestral', 'Escolarizado', '', 2, '13/05/23'),
-(12058, 'ESPECIALIDAD EN SEGURIDAD E HIGIENE INDUSTRIAL', 'No', 'Ingenieria industrial', 'Evaluar y ejecutar control en una Industria', 'Vigente', 'Cuatrimestral', 'Escolarizado', '', 1, '13/09/23'),
-(12098, 'MAESTRIA EN CALIDAD', 'Si', 'matematicas', 'Uso servidores', 'Vigente', 'Trimestral', 'Escolarizado', '', 1, '13/09/22');
+(12040, 'MAESTRIA EN FISIOTERAPIA DEPORTIVA', 'No', 'Fisioterapia', 'Desarrolla metodologia de entrenamiento y tecnicas para trabajar en un equipo deportivo', 'No vigente', 'Trimestral', 'Escolarizado', 'Especialidad', 4, '13/05/23'),
+(12050, 'MAESTRIA EN ADMINISTRACIÃ“N DE NEGOCIOS CON ORIENTACIÃ“N EN HOSPITALIDAD', 'Si', 'Administracion de empresas', 'Desarrolla tu capacidad gerencial y directiva para coordinar y administrar proyectos en esta industria.', 'Vigente', 'Cuatrimestral', 'Escolarizado', 'Doctorado', 2, '13/05/23'),
+(12058, 'ESPECIALIDAD EN SEGURIDAD E HIGIENE INDUSTRIAL', 'No', 'Ingenieria industrial', 'Evaluar y ejecutar control en una Industria', 'Vigente', 'Cuatrimestral', 'Escolarizado', 'Doctorado', 1, '13/09/23'),
+(12098, 'MAESTRIA EN CALIDAD', 'Si', 'matematicas', 'Uso servidores', 'Vigente', 'Trimestral', 'Escolarizado', 'Maestría', 1, '13/09/22');
 
 -- --------------------------------------------------------
 

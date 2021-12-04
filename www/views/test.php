@@ -13,6 +13,15 @@
 </head>
 <body>
 <?php include_once 'navbar.php'; ?>
+<?php if (isset($_SESSION['select'])): ?>
+    <div class="select" style="margin: 0 0 0 10px">
+        <select name="page" onchange="window.location=this.value">
+            <?php foreach ($_SESSION['select'] as $row_key => $row): ?>
+                <option value="<?= $row_key; ?>"><?= $row; ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+<?php endif ?>
 <section class="section">
     <?php include_once 'table.php'; ?>
 </section>

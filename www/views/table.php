@@ -4,7 +4,9 @@
             <table class='table'>
                 <thead>
                 <tr>
+                    <?php if(isset($_SESSION['crud'])): ?>
                     <th></th>
+                    <?php endif ?>
                     <?php foreach ($_SESSION['columns'] as $row_key): ?>
                         <th><?= $row_key; ?></th>
                     <?php endforeach; ?>
@@ -13,6 +15,7 @@
                 <tbody>
                 <?php foreach ($_SESSION['rows'] as $row_key => $row): ?>
                     <tr>
+                        <?php if(isset($_SESSION['crud'])): ?>
                         <td>
                             <form method="post" action="<?= "/?id=".$row['id_posgrado']; ?>">
                                 <button class="button" name="DELETE" type="submit">
@@ -28,6 +31,7 @@
                                         </span>
                             </a>
                         </td>
+                        <?php endif ?>
                         <?php foreach ($_SESSION['columns'] as $field_key): ?>
                             <td><?= $row[$field_key]; ?></td>
                         <?php endforeach; ?>
